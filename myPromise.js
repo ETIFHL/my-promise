@@ -167,8 +167,8 @@ class MyPromise {
         // 整个 flag 防止重复调用
         let called = false
         try {
-          // 终于调用了，别管外部 then 方法绑啥乱七八糟的 context。
-          // 这里
+          // 终于调用了，当然是由需要resolve的值（x）进行进行后续调用。
+          // 不管后续调用几层，最后还是回归至第一次声明的 promise2 的 resolve 来返回。
           then.call(
             x,
             (y) => {
@@ -183,18 +183,22 @@ class MyPromise {
             }
           )
         } catch (e) {
+          // 要是传入的方法执行错了，直接 reject
           if (called) return
           reject(e)
         }
       } else {
+        // 不是一个方法，是个值，解析完了，直接 resolve
         resolve(x)
       }
     } else {
+      // 不是 promise， 不是 object 和 function，直接返回值, 同上
       resolve(x)
     }
   }
 
   static deferred() {
+    // 提供给 test-suit 的接口
     const result = {}
     result.promise = new MyPromise((resolve, reject) => {
       result.resolve = resolve
