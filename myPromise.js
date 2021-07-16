@@ -206,6 +206,24 @@ class MyPromise {
     })
     return result
   }
+
+  // 实现一下 es5 提供的方法，promise-aplus 中未定义
+  static all(promiseList) {
+    return new MyPromise((resolve, reject) => {
+      let length = promiseList.length
+      const res = []
+      let count = 0
+      for (let i = 0; i < length; ++i) {
+        MyPromise.resolve(promiseList[i]).then(value => {
+          res[i] = value
+          count++
+          if (count === length) {
+            resolve(res)
+          }
+        }, reject)
+      }
+    })
+  }
 }
 
 /**
