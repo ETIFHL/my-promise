@@ -224,6 +224,17 @@ class MyPromise {
       }
     })
   }
+
+  static race(promiseList) {
+    return new MyPromise((resolve, reject) => {
+      if (promiseList.length === 0) {
+        return resolve()
+      }
+      for (let i = 0; i < promiseList.length; ++i) {
+        MyPromise.resolve(promiseList[i]).then(resolve, reject)
+      }
+    })
+  }
 }
 
 /**
