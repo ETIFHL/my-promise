@@ -24,3 +24,17 @@
 > ```
 7. resolvePromise 就是为了让后续的回调函数参数取到的是一个值，回调肯定不想去自己再处理 Promise 。
 8. 规范就是规范，里面各种情况考虑的挺周全，也有为了兼容以前实现的处理。
+
+##### Promise 的其他方法
+
+promise 在实际操作中还是有很多方便的方法去使用。尝试实现了 Promise.all 和 Promise.race。
+
+promise-aplus 里面没有这两个方法的测试用例。
+
+看了下 issue 果然有人提意见，不过回复的信息也很明确。
+
+> This is a test suite for the Promises/A+ spec, which only specifies the minimum needed for interoperability (the then method). If you're interested in a test suite for standard ES2015 promises, test262 is probably what you're interested in.
+
+##### 一转 tc39 的 test262
+
+又有好多新花样，开个新的项目通过实现基础方法来扩展对 js 的认识和基础编码的能力。
